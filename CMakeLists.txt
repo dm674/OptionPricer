@@ -8,6 +8,7 @@ add_executable(OptionPricer
         PathDependent.h PathDependent.cpp
         Wrapper.h
         Statistics/MCStatistics.h Statistics/MCStatistics.cpp
+        Statistics/MCTermination.h Statistics/MCTermination.cpp
         Options&Payoffs/Parameters.h Options&Payoffs/Parameters.cpp
         Options&Payoffs/Vanilla3.h Options&Payoffs/Vanilla3.cpp
         Statistics/ConvergenceTable.h Statistics/ConvergenceTable.cpp

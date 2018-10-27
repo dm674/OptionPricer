@@ -31,6 +31,34 @@ StatisticsMC* StatisticsMean::clone() const
     return new StatisticsMean(*this);
 }
 
+/*
+ * StatisticsVariance
+*/
+
+StatisticsVariance::StatisticsVariance()
+        :
+        RunningSum(0.0), RunningSumSquare(0.0), PathsDone(0UL) { }
+
+void StatisticsVariance::DumpOneResult(double result)
+{
+    PathsDone++;
+    RunningSum += result;
+    RunningSumSquare += pow(result,2);
+}
+
+vector<vector<double> >
+StatisticsVariance::GetResultsSoFar() const
+{
+    vector<vector<double> > Results(1);
+    Results[0].resize(1);
+    Results[0][0] = RunningSumSquare / PathsDone - pow(RunningSum / PathsDone,2);
+    return Results;
+}
+
+StatisticsMC* StatisticsVariance::clone() const
+{
+    return new StatisticsVariance(*this);
+}
 
 /*
  * StatisticsMoments

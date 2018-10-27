@@ -26,6 +26,20 @@ private:
     unsigned long PathsDone;
 };
 
+class StatisticsVariance : public StatisticsMC
+{
+public:
+    StatisticsVariance();
+    virtual void DumpOneResult(double result);
+    virtual std::vector< std::vector<double> >
+    GetResultsSoFar() const;
+    virtual StatisticsMC* clone() const;
+private:
+    double RunningSum;
+    double RunningSumSquare;
+    unsigned long PathsDone;
+};
+
 class StatisticsMoments : public StatisticsMC
 {
 public:
