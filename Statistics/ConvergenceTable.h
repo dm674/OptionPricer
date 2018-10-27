@@ -1,7 +1,7 @@
 #ifndef CONVERGENCE_TABLE_H
 #define CONVERGENCE_TABLE_H
 #include "MCStatistics.h"
-#include "../PrevChapCode/Wrapper.h"
+#include "../Wrapper.h"
 class ConvergenceTable : public StatisticsMC
 {
 public:

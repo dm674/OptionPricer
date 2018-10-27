@@ -1,7 +1,7 @@
 #ifndef ANTITHETIC_H
 #define ANTITHETIC_H
 #include "Random2.h"
-#include "../PrevChapCode/Wrapper.h"
+#include "../Wrapper.h"
 
 class AntiThetic : public RandomBase
 {

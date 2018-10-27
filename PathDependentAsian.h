@@ -1,7 +1,7 @@
 #ifndef PATH_DEPENDENT_ASIAN_H
 #define PATH_DEPENDENT_ASIAN_H
 #include "PathDependent.h"
-#include "PrevChapCode/PayOffBridge.h"
+#include "Options&Payoffs/PayOffBridge.h"
 
 class PathDependentAsian : public PathDependent
 {
