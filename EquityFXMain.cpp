@@ -6,6 +6,7 @@ using namespace std;
 #include"PathGeneration/AntiThetic.h"
 #include"PathDependentAsian.h"
 #include"ExoticBSEngine.h"
+#include"Statistics/MCTermination.h"
 
 int main() {
     double Expiry;
@@ -14,7 +15,6 @@ int main() {
     double Vol;
     double r;
     double d;
-    unsigned long NumberOfPaths;
     unsigned NumberOfDates;
 
     cout << "\nEnter expiry\n";
@@ -37,9 +37,6 @@ int main() {
 
     cout << "\nNumber of dates\n";
     cin >> NumberOfDates;
-
-    cout << "\nNumber of Monte Carlo paths\n";
-    cin >> NumberOfPaths;
 
     // Create payoff object for generic call option
     PayOffCall thePayOff(Strike);
@@ -77,10 +74,41 @@ int main() {
     RandomParkMiller generator(NumberOfDates);
     AntiThetic GenTwo(generator);
 
+    // Create user-defined set of termination
+    vector<TerminationMC*> term_tmp;
+    int UserInput;
+    do {
+        cout << "\nTermination: Paths (1), Time (2), Variance (3), Convergence (4) or done (0)\n";
+        cin >> UserInput;
+        switch (UserInput) {
+            case 1:
+                unsigned long NumberOfPaths;
+                cout << "Number of Monte Carlo paths\n";
+                cin >> NumberOfPaths;
+                term_tmp.push_back(new TerminationPaths(NumberOfPaths)); break;
+            case 2:
+                double maxtime;
+                cout << "Maximum time (in seconds)\n";
+                cin >> maxtime;
+                term_tmp.push_back(new TerminationTime(maxtime)); break;
+            case 3:
+                double maxvariance;
+                cout << "Maximum variance accepted\n";
+                cin >> maxtime;
+                term_tmp.push_back(new TerminationVariance(maxvariance)); break;
+            case 4:
+                double epsilon;
+                cout << "Absolute threshold\n";
+                cin >> epsilon;
+                term_tmp.push_back(new TerminationConv(epsilon)); break;
+        }
+    } while(UserInput != 0 || term_tmp.empty());
+    TerminationMulti termination(term_tmp);
+
     // Create Black-Scholes engine for exotic option
     ExoticBSEngine theEngine(*theOption, rParam, dParam,
                              VolParam, GenTwo, Spot);
-    theEngine.DoSimulation(gathererTwo, NumberOfPaths);
+    theEngine.DoSimulation(gathererTwo, termination);
 
     // Obtain and output results from convergence table
     vector<vector<double> > results =

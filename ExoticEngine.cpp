@@ -1,5 +1,6 @@
 #include "ExoticEngine.h"
 #include <cmath>
+#include<iostream>
 
 ExoticEngine::ExoticEngine(const Wrapper<PathDependent>& TheProduct_,
                            const Parameters& r_)
@@ -14,17 +15,20 @@ ExoticEngine::ExoticEngine(const Wrapper<PathDependent>& TheProduct_,
 }
 
 void ExoticEngine::DoSimulation(StatisticsMC& TheGatherer,
-                                unsigned long NumberOfPaths)
+                                TerminationMC& terminator)
 {
     MJArray SpotValues(TheProduct->GetLookAtTimes().size());
     TheseCashFlows.resize(TheProduct->MaxNumberOfCashFlows());
+    terminator.Reset(); // Use to reset all conditions, including timer
     double thisValue;
-    for (unsigned long i =0; i < NumberOfPaths; ++i)
+    do
     {
         GetOnePath(SpotValues);
         thisValue = DoOnePath(SpotValues);
         TheGatherer.DumpOneResult(thisValue);
-    }
+        terminator.DumpOneResult(thisValue);
+        //cout << terminator.IsDone();
+    } while (!terminator.IsDone());
     return;
 }
 

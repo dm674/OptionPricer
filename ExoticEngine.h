@@ -5,6 +5,7 @@
 #include "Options&Payoffs/Parameters.h"
 #include "PathDependent.h"
 #include "Statistics/MCStatistics.h"
+#include "Statistics/MCTermination.h"
 #include <vector>
 
 class ExoticEngine
@@ -14,7 +15,7 @@ public:
                 const Parameters& r_);
     virtual void GetOnePath(MJArray& SpotValues)=0;
     void DoSimulation(StatisticsMC& TheGatherer,
-                      unsigned long NumberOfPaths);
+                      TerminationMC& terminator);
     virtual ~ExoticEngine(){}
     double DoOnePath(const MJArray& SpotValues) const;
 
