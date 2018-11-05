@@ -19,7 +19,8 @@ public:
     virtual void Reset()=0;
     virtual TerminationMC* clone() const=0;
     virtual ~TerminationMC(){}
-private: };
+private:
+};
 
 /*
  * Single termination conditions
@@ -102,11 +103,27 @@ public:
     TerminationMulti(std::vector<TerminationMC*> terms);
     virtual ~TerminationMulti();
     virtual void DumpOneResult(double result);
-    virtual bool IsDone() const;
+    virtual bool IsDone() const = 0;
     virtual void Reset();
-    virtual TerminationMC* clone() const;
-private:
+    virtual TerminationMC* clone() const =0;
+protected:
     std::vector<TerminationMC*> Terms;
+};
+
+class TerminationMultiOR : public TerminationMulti
+{
+public:
+    TerminationMultiOR(std::vector<TerminationMC*> terms);
+    virtual bool IsDone() const;
+    virtual TerminationMC* clone() const;
+};
+
+class TerminationMultiAND : public TerminationMulti
+{
+public:
+    TerminationMultiAND(std::vector<TerminationMC*> terms);
+    virtual bool IsDone() const;
+    virtual TerminationMC* clone() const;
 };
 
 #endif

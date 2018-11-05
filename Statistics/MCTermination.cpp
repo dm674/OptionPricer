@@ -169,15 +169,6 @@ void TerminationMulti::DumpOneResult(double current)
     }
 }
 
-bool TerminationMulti::IsDone() const
-{
-    bool done = false;
-    for (int i = 0 ; i < Terms.size() ; i++){
-        done = (done || Terms[i]->IsDone());
-    }
-    return done;
-}
-
 void TerminationMulti::Reset()
 {
     for (int i = 0 ; i < Terms.size() ; i++){
@@ -186,14 +177,62 @@ void TerminationMulti::Reset()
     return;
 }
 
-TerminationMC* TerminationMulti::clone() const
-{
-    return new TerminationMulti(*this);
-}
+//TerminationMC* TerminationMulti::clone() const
+//{
+//    return new TerminationMulti(*this);
+//}
 
 TerminationMulti::~TerminationMulti()
 {
     for (int i = 0 ; i < Terms.size() ; i++){
         delete Terms[i];
     }
+}
+
+/*
+ * TerminationMultiOR
+ */
+
+TerminationMultiOR::TerminationMultiOR(vector<TerminationMC*> terms)
+        :
+        TerminationMulti(terms)
+{
+}
+
+bool TerminationMultiOR::IsDone() const
+{
+    bool done = false;
+    for (int i = 0 ; i < Terms.size() ; i++){
+        done = (done || Terms[i]->IsDone());
+    }
+    return done;
+}
+
+TerminationMC* TerminationMultiOR::clone() const
+{
+    return new TerminationMultiOR(*this);
+}
+
+/*
+ * TerminationMultiAND
+ */
+
+TerminationMultiAND::TerminationMultiAND(vector<TerminationMC*> terms)
+      :
+      TerminationMulti(terms)
+{
+}
+
+bool TerminationMultiAND::IsDone() const
+{
+    bool done = false;
+    for (int i = 0 ; i < Terms.size() ; i++){
+        done = (done && Terms[i]->IsDone());
+    }
+    return done;
+}
+
+TerminationMC* TerminationMultiAND::clone() const
+{
+    return new TerminationMultiAND(*this);
 }
