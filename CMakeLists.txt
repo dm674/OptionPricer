@@ -11,6 +11,7 @@ add_executable(OptionPricer
         Statistics/MCTermination.h Statistics/MCTermination.cpp
         Options&Payoffs/Parameters.h Options&Payoffs/Parameters.cpp
         Options&Payoffs/Vanilla3.h Options&Payoffs/Vanilla3.cpp
+        Options&Payoffs/DoubleDigital2.h Options&Payoffs/DoubleDigital2.cpp
         Statistics/ConvergenceTable.h Statistics/ConvergenceTable.cpp
         PathGeneration/Random2.h PathGeneration/Random2.cpp
         PathGeneration/Normals.h PathGeneration/Normals.cpp
