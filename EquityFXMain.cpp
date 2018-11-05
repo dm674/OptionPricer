@@ -7,7 +7,7 @@ using namespace std;
 #include"PathDependentAsian.h"
 #include"ExoticBSEngine.h"
 #include"Statistics/MCTermination.h"
-#include"Options&Payoffs/DoubleDigital2.h"
+#include"Options&Payoffs/PayOffDiff.h"
 
 int main() {
     double Expiry;
@@ -41,10 +41,12 @@ int main() {
     ParametersConstant rParam(r);
     ParametersConstant dParam(d);
 
+
     // Create user-defined payoff object
     PayOff* thePayOff;
     int in_PayOffType;
-    cout << "\nChoose between payoffs: (1) Call option, (2) Put option, (3) Double-digital option\n";
+    cout << "\nChoose between payoffs: (1) Call option, (2) Put option, "
+            "(3) Digital option, (4) Double-digital option\n";
     cin >> in_PayOffType;
     cout << "\nStrike\n";
     cin >> Strike;
@@ -54,8 +56,10 @@ int main() {
         case 2:
             thePayOff = new PayOffPut(Strike); break;
         case 3:
+            thePayOff = new PayOffDigital(Strike); break;
+        case 4:
             double Strike2;
-            cout << "\nUpper strikc\n";
+            cout << "\nUpper strike\n";
             cin >> Strike2;
             thePayOff = new PayOffDoubleDigital(Strike,Strike2); break;
         default:
@@ -63,6 +67,7 @@ int main() {
             return 1;
     }
     //PayOff* thePayOff = new PayOffCall(Strike);
+
 
     // Create array of times for cashflow computation
     // i.e. number of points on each Monte Carlo path
@@ -83,6 +88,7 @@ int main() {
         cout << "Wrong option type";
         return 1;
     }
+
 
     // Create user-defined set of statistics to gather throughout MC simulation
     vector<StatisticsMC*> stat_tmp;
@@ -114,9 +120,6 @@ int main() {
     //ConvergenceTable gatherer(gathererInit);
     StatisticsMulti gatherer(stat_tmp);
 
-    // Create anti-thetic linear congruential generator (using Park-Miller method)
-    RandomParkMiller generator(NumberOfDates);
-    AntiThetic GenTwo(generator);
 
     // Create user-defined set of termination conditions
     vector<TerminationMC*> term_tmp;
@@ -163,7 +166,12 @@ int main() {
     } else {
         termination = new TerminationMultiOR(term_tmp);
     }
-//    termination = new TerminationMultiOR(term_tmp);
+    //termination = new TerminationMultiOR(term_tmp);
+
+
+    // Create anti-thetic linear congruential generator (using Park-Miller method)
+    RandomParkMiller generator(NumberOfDates);
+    AntiThetic GenTwo(generator);
 
     // Create Black-Scholes engine for exotic option
     ExoticBSEngine theEngine(*theOption, rParam, dParam,

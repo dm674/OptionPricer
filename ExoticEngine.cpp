@@ -27,7 +27,6 @@ void ExoticEngine::DoSimulation(StatisticsMC& TheGatherer,
         thisValue = DoOnePath(SpotValues);
         TheGatherer.DumpOneResult(thisValue);
         terminator.DumpOneResult(thisValue);
-        //cout << terminator.IsDone();
     } while (!terminator.IsDone());
     return;
 }
