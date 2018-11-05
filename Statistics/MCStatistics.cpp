@@ -1,7 +1,25 @@
 #include"MCStatistics.h"
 #include<cmath>
 #include<algorithm>
+#include<iostream>
 using namespace std;
+
+/*
+ * StatisticsMC
+ */
+
+void StatisticsMC::PrintResults() const
+{
+    vector<vector<double> > results = GetResultsSoFar();
+    {
+        for (unsigned long i=0; i < results.size(); i++)
+        {
+            for (unsigned long j=0; j < results[i].size(); j++)
+                cout << results[i][j] << " ";
+            cout << "\n";
+        }
+    }
+}
 
 /*
  * StatisticsMean
@@ -24,6 +42,12 @@ StatisticsMean::GetResultsSoFar() const
     Results[0].resize(1);
     Results[0][0] = RunningSum / PathsDone;
     return Results;
+}
+
+void StatisticsMean::PrintResults() const
+{
+    cout << "\nThe option's price is ";
+    StatisticsMC::PrintResults();
 }
 
 StatisticsMC* StatisticsMean::clone() const
@@ -53,6 +77,12 @@ StatisticsVariance::GetResultsSoFar() const
     Results[0].resize(1);
     Results[0][0] = RunningSumSquare / PathsDone - pow(RunningSum / PathsDone,2);
     return Results;
+}
+
+void StatisticsVariance::PrintResults() const
+{
+    cout << "\nThe option's variance is ";
+    StatisticsMC::PrintResults();
 }
 
 StatisticsMC* StatisticsVariance::clone() const
@@ -94,6 +124,12 @@ StatisticsMoments::GetResultsSoFar() const
     return Results;
 }
 
+void StatisticsMoments::PrintResults() const
+{
+    cout << "\nThe option's 4 first moments are ";
+    StatisticsMC::PrintResults();
+}
+
 StatisticsMC* StatisticsMoments::clone() const
 {
     return new StatisticsMoments(*this);
@@ -124,9 +160,15 @@ StatisticsVaR::GetResultsSoFar() const
 {
     vector<vector<double> > Results(1);
     Results[0].resize(1);
-    // Return 1%-VaR
+    // Return 99%-VaR
     Results[0][0] = RunningLows[(int)round(PathsDone/100)];
     return Results;
+}
+
+void StatisticsVaR::PrintResults() const
+{
+    cout << "\nThe option's 99%-VaR is ";
+    StatisticsMC::PrintResults();
 }
 
 StatisticsMC* StatisticsVaR::clone() const
@@ -160,6 +202,13 @@ StatisticsMulti::GetResultsSoFar() const
         Results[i] = Stats[i]->GetResultsSoFar()[0];
     }
     return Results;
+}
+
+void StatisticsMulti::PrintResults() const
+{
+    for (int i = 0 ; i < Stats.size() ; i++){
+        Stats[i]->PrintResults();
+    }
 }
 
 StatisticsMC* StatisticsMulti::clone() const

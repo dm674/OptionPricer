@@ -10,6 +10,7 @@ public:
     virtual void DumpOneResult(double result);
     virtual std::vector<std::vector<double> >
     GetResultsSoFar() const;
+    virtual void PrintResults() const;
 private:
     Wrapper<StatisticsMC> Inner;
     std::vector<std::vector<double> > ResultsSoFar;

@@ -9,9 +9,11 @@ public:
     virtual void DumpOneResult(double result)=0;
     virtual std::vector< std::vector<double> >
         GetResultsSoFar() const=0;
+    virtual void PrintResults() const;
     virtual StatisticsMC* clone() const=0;
     virtual ~StatisticsMC(){}
-private: };
+private:
+};
 
 class StatisticsMean : public StatisticsMC
 {
@@ -20,6 +22,7 @@ public:
     virtual void DumpOneResult(double result);
     virtual std::vector< std::vector<double> >
         GetResultsSoFar() const;
+    virtual void PrintResults() const;
     virtual StatisticsMC* clone() const;
 private:
     double RunningSum;
@@ -33,6 +36,7 @@ public:
     virtual void DumpOneResult(double result);
     virtual std::vector< std::vector<double> >
     GetResultsSoFar() const;
+    virtual void PrintResults() const;
     virtual StatisticsMC* clone() const;
 private:
     double RunningSum;
@@ -47,6 +51,7 @@ public:
     virtual void DumpOneResult(double result);
     virtual std::vector< std::vector<double> >
     GetResultsSoFar() const;
+    virtual void PrintResults() const;
     virtual StatisticsMC* clone() const;
 private:
     double RunningSum;
@@ -63,6 +68,7 @@ public:
     virtual void DumpOneResult(double result);
     virtual std::vector< std::vector<double> >
     GetResultsSoFar() const;
+    virtual void PrintResults() const;
     virtual StatisticsMC* clone() const;
 private:
     std::vector<double> RunningLows;
@@ -77,6 +83,7 @@ public:
     virtual void DumpOneResult(double result);
     virtual std::vector< std::vector<double> >
     GetResultsSoFar() const;
+    virtual void PrintResults() const;
     virtual StatisticsMC* clone() const;
 private:
     std::vector<StatisticsMC*> Stats;

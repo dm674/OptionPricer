@@ -1,4 +1,6 @@
 #include"ConvergenceTable.h"
+#include<iostream>
+using namespace std;
 
 // NB: Copy constructor, destructor or assignment operator not required:
 // dynamic memory allocation handled by Wrapper template class
@@ -48,4 +50,11 @@ ConvergenceTable::GetResultsSoFar() const
         }
     }
     return tmp;
+}
+
+void ConvergenceTable::PrintResults() const
+{
+    Inner->PrintResults();
+    cout << "and converges as \n";
+    StatisticsMC::PrintResults();
 }
