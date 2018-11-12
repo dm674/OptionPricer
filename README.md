@@ -1,14 +1,13 @@
 # Monte-Carlo Option Pricer
 
+The goal of this project is to build a robust and versatile Monte-Carlo pricing engine for Asian and European options. All code is in C++ and uses various object-oriented programming design patterns.
+The basic infrastructure is based on Chapters 1-7 of [C++ Design Patterns and Derivatives Pricing](http://www.markjoshi.com/design/) by Mark S. Joshi. For simplicity, notation conventions are kept wherever possible.
 
-The basic infrastructure is based on Chapters 1-7 of [C++ Design Patterns and Derivatives Pricing](http://www.markjoshi.com/design/) by Mark S. Joshi.
-For simplicity, notation conventions are kept wherever possible.
-
-Object classes can be categorized by their actions
-* Generating a stock price path (PathGeneration folder)
-* Producing the cash-flows of the chosen option with the given payoff (Options&Payoffs folder)
-* Accounting for the cash-flows and calling successive paths (main folder)
-* Gathering the chosen statistics over all paths up to the chosen termination point (Statistics folder)
+Object classes can be categorized by their actions:
+* Generating a stock price path (PathGeneration folder);
+* Producing the cash-flows of the chosen option with the given payoff (Options&Payoffs folder);
+* Accounting for the cash-flows and calling successive paths (main folder);
+* Gathering the chosen statistics over all paths up to the chosen termination point (Statistics folder).
 
 We can summarize the key steps of the main algorithm:
 * The user defines all main parameters: expiry date, current spot price, option and payoff types, chosen statistics and termination conditions, etc.;
