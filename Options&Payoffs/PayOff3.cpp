@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-// Vanilla call
+// Call payoff
 PayOffCall::PayOffCall(double Strike_) : Strike(Strike_)
 {
 }
@@ -16,7 +16,7 @@ PayOff* PayOffCall::clone() const
     return new PayOffCall(*this);
 }
 
-// Vanilla put
+// Put payoff
 double PayOffPut::operator() (double Spot) const
 {
     return max(Strike-Spot,0.0);

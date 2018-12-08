@@ -26,8 +26,8 @@ PayOff* PayOffDiff::clone() const
 
 PayOffDoubleDigital::PayOffDoubleDigital(double LowerLevel_,
                                          double UpperLevel_)
-         : PayOffDiff(new PayOffDigital(LowerLevel_),
-                      new PayOffDigital(UpperLevel_))
+         : PayOffDiff(new PayOffDigitalCall(LowerLevel_),
+                      new PayOffDigitalCall(UpperLevel_))
 {
 }
 

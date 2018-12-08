@@ -15,14 +15,26 @@
 //    double UpperLevel;
 //};
 
-class PayOffDigital : public PayOff
+class PayOffDigitalCall : public PayOff
 {
 public:
-    PayOffDigital(double Strike_);
+    PayOffDigitalCall(double Strike_);
     virtual double operator()(double Spot) const;
-    virtual ~PayOffDigital(){}
+    virtual ~PayOffDigitalCall(){}
     virtual PayOff* clone() const;
 private:
     double Strike;
 };
+
+class PayOffDigitalPut : public PayOff
+{
+public:
+    PayOffDigitalPut(double Strike_);
+    virtual double operator()(double Spot) const;
+    virtual ~PayOffDigitalPut(){}
+    virtual PayOff* clone() const;
+private:
+    double Strike;
+};
+
 #endif

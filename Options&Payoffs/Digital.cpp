@@ -25,19 +25,33 @@
  * Digital payoff
  */
 
-PayOffDigital::PayOffDigital(double Strike_)
+PayOffDigitalCall::PayOffDigitalCall(double Strike_)
         :   Strike(Strike_)
 {
 }
 
-double PayOffDigital::operator()(double Spot) const
+double PayOffDigitalCall::operator()(double Spot) const
 {
-    if (Spot <= Strike)
-        return 0;
-    return 1;
+    return (Spot <= Strike) ? 0 : 1;
 }
 
-PayOff* PayOffDigital::clone() const
+PayOff* PayOffDigitalCall::clone() const
 {
-    return new PayOffDigital(*this);
+    return new PayOffDigitalCall(*this);
+}
+
+PayOffDigitalPut::PayOffDigitalPut(double Strike_)
+        :   Strike(Strike_)
+{
+}
+
+double PayOffDigitalPut::operator()(double Spot) const
+{
+    return (Spot >= Strike) ? 0 : 1;
+
+}
+
+PayOff* PayOffDigitalPut::clone() const
+{
+    return new PayOffDigitalPut(*this);
 }
