@@ -84,19 +84,6 @@ private:
  * Multiple terminations
  */
 
-class TerminationPathsNTime : public TerminationMC
-{
-public:
-    TerminationPathsNTime(unsigned long maxpaths, double maxtime);
-    virtual void DumpOneResult(double current = 0.0);
-    virtual bool IsDone() const;
-    virtual void Reset();
-    virtual TerminationPathsNTime* clone() const;
-private:
-    TerminationPaths TermPaths;
-    TerminationTime TermTime;
-};
-
 class TerminationMulti : public TerminationMC
 {
 public:

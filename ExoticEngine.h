@@ -3,7 +3,7 @@
 
 #include "Wrapper.h"
 #include "Options&Payoffs/Parameters.h"
-#include "PathDependent.h"
+#include "Options&Payoffs/PathDependent.h"
 #include "Statistics/MCStatistics.h"
 #include "Statistics/MCTermination.h"
 #include <vector>

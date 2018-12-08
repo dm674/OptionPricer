@@ -100,7 +100,7 @@ TerminationVariance* TerminationVariance::clone() const
 
 TerminationConv::TerminationConv(double epsilon)
         :
-        Epsilon(epsilon), Prev(10000.0), InnerMean(StatisticsMean()) { }
+        Epsilon(epsilon), Prev(1000000.0), InnerMean(StatisticsMean()) { }
 
 void TerminationConv::DumpOneResult(double current)
 {
@@ -123,35 +123,6 @@ TerminationConv* TerminationConv::clone() const
     return new TerminationConv(*this);
 }
 
-/*
- * TerminationPaths&Time
-*/
-
-TerminationPathsNTime::TerminationPathsNTime(unsigned long maxpaths, double maxtime)
-    :
-    TermPaths(TerminationPaths(maxpaths)) , TermTime(TerminationTime(maxtime)) { }
-
-void TerminationPathsNTime::DumpOneResult(double current)
-{
-    TermPaths.DumpOneResult();
-}
-
-bool TerminationPathsNTime::IsDone() const
-{
-    return (TermPaths.IsDone() || TermTime.IsDone());
-}
-
-void TerminationPathsNTime::Reset()
-{
-    TermPaths.Reset();
-    TermTime.Reset();
-    return;
-}
-
-TerminationPathsNTime* TerminationPathsNTime::clone() const
-{
-    return new TerminationPathsNTime(*this);
-}
 
 /*
  * TerminationMulti
@@ -225,7 +196,7 @@ TerminationMultiAND::TerminationMultiAND(vector<TerminationMC*> terms)
 
 bool TerminationMultiAND::IsDone() const
 {
-    bool done = false;
+    bool done = true;
     for (int i = 0 ; i < Terms.size() ; i++){
         done = (done && Terms[i]->IsDone());
     }

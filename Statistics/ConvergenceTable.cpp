@@ -8,7 +8,7 @@ using namespace std;
 ConvergenceTable::ConvergenceTable(const Wrapper<StatisticsMC>& Inner_)
 : Inner(Inner_)
         {
-                StoppingPoint=2;
+                StoppingPoint=1;
                 PathsDone=0;
         }
 
