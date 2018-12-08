@@ -1,7 +1,7 @@
 #ifndef PATH_DEPENDENT_ASIAN_H
 #define PATH_DEPENDENT_ASIAN_H
 #include "PathDependent.h"
-#include "Options&Payoffs/PayOffBridge.h"
+#include "PayOffBridge.h"
 
 class PathDependentAsian : public PathDependent
 {
@@ -25,8 +25,8 @@ class PathDependentArithmeticAsian : public PathDependentAsian
 {
 public:
     PathDependentArithmeticAsian(const MJArray& LookAtTimes_,
-                       double DeliveryTime_,
-                       const PayOffBridge& ThePayOff_);
+                                 double DeliveryTime_,
+                                 const PayOffBridge& ThePayOff_);
     virtual PathDependent* clone() const;
     virtual unsigned long CashFlows(const MJArray& SpotValues,
                                     std::vector<CashFlow>& GeneratedFlows) const;
@@ -36,8 +36,8 @@ class PathDependentGeometricAsian : public PathDependentAsian
 {
 public:
     PathDependentGeometricAsian(const MJArray& LookAtTimes_,
-                                 double DeliveryTime_,
-                                 const PayOffBridge& ThePayOff_);
+                                double DeliveryTime_,
+                                const PayOffBridge& ThePayOff_);
     virtual PathDependent* clone() const;
     virtual unsigned long CashFlows(const MJArray& SpotValues,
                                     std::vector<CashFlow>& GeneratedFlows) const;

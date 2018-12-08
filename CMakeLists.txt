@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(OptionPricer
         Arrays.h Arrays.cpp
-        PathDependent.h PathDependent.cpp
+        Options&Payoffs/PathDependent.h Options&Payoffs/PathDependent.cpp
         Wrapper.h
         Statistics/MCStatistics.h Statistics/MCStatistics.cpp
         Statistics/MCTermination.h Statistics/MCTermination.cpp
@@ -20,7 +20,10 @@ add_executable(OptionPricer
         ExoticBSEngine.h ExoticBSEngine.cpp
         Options&Payoffs/PayOffBridge.h Options&Payoffs/PayOffBridge.cpp
         Options&Payoffs/PayOff3.h Options&Payoffs/PayOff3.cpp
-        PathDependentAsian.h PathDependentAsian.cpp
+        Options&Payoffs/PathDependentAsian.h Options&Payoffs/PathDependentAsian.cpp
         PathGeneration/ParkMiller.h PathGeneration/ParkMiller.cpp
         PathGeneration/AntiThetic.h PathGeneration/AntiThetic.cpp
+        Options&Payoffs/European.h Options&Payoffs/European.cpp
+        Options&Payoffs/Lookback.h Options&Payoffs/Lookback.cpp
+        BlackScholesFormulas.h BlackScholesFormulas.cpp
         EquityFXMain.cpp)

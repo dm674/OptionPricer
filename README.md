@@ -1,6 +1,6 @@
 # Monte-Carlo Option Pricer
 
-The goal of this project is to build a robust and versatile Monte-Carlo pricing engine for Asian and European options. All code is in C++ and uses various object-oriented programming design patterns.
+The goal of this project is to build a robust and versatile Monte-Carlo pricing engine for European, Asian and lookback options, with call, put, digital and double-digital options. All code is in C++ and uses various object-oriented programming design patterns.
 The basic infrastructure is based on Chapters 1-7 of [C++ Design Patterns and Derivatives Pricing](http://www.markjoshi.com/design/) by Mark S. Joshi. For simplicity, notation conventions are kept wherever possible.
 
 Object classes can be categorized by their actions:
@@ -20,5 +20,5 @@ We can summarize the key steps of the main algorithm:
 * The termination conditions are checked;
 * Once the total termination condition is reached, the statistics gatherer obtains and prints the results.
 
-
+To preserve code generality, European options are considered path-dependent, but in practice only depend on the final point of the path.
 For arithmetic Asian options, results can be compared to [The Value of an Asian Option](https://doi.org/10.2307/3215221) by L.C.G. Rogers & Z. Shi.
